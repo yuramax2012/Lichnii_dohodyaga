@@ -25,6 +25,15 @@ jobs:
           pip install --upgrade pip
           pip install "Cython<3.0" "setuptools<71.0.0" buildozer
 
+      - name: Add swap space
+        run: |
+          sudo fallocate -l 4G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          sudo swapon --show
+          free -h
+
       - name: Force buildozer.spec
         run: |
           cat > buildozer.spec << 'EOF'
