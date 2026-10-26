@@ -25,6 +25,29 @@ jobs:
           pip install --upgrade pip
           pip install "Cython<3.0" "setuptools<71.0.0" buildozer
 
+      - name: Force buildozer.spec
+        run: |
+          cat > buildozer.spec << 'EOF'
+          [app]
+          title = Lichnii Dohodyaga
+          package.name = lichdohod
+          package.domain = org.dohodyaga
+          source.dir = .
+          source.include_exts = py,png,jpg,jpeg,mp3,ogg,wav
+          version = 0.1
+          requirements = python3==3.10.12,hostpython3==3.10.12,kivy==2.3.0,pyjnius==1.5.0,pygame
+          orientation = portrait
+          fullscreen = 1
+          android.api = 33
+          android.minapi = 24
+          android.ndk = 28c
+          android.accept_sdk_license = True
+
+          [buildozer]
+          log_level = 2
+          warn_on_root = 1
+          EOF
+
       - name: Build APK
         run: |
           yes | buildozer android debug
