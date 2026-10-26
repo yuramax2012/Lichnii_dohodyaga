@@ -27,7 +27,6 @@ jobs:
 
       - name: Build APK
         run: |
-          yes | buildozer android clean
           yes | buildozer android debug
 
       - name: Upload APK
@@ -43,10 +42,3 @@ jobs:
           files: bin/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  deploy-pages:
-    needs: build-apk
-    runs-on: ubuntu-latest
-    if: false
-    steps:
-      - run: echo "disabled"
