@@ -59,7 +59,7 @@ jobs:
           android.ndk = 28c
           android.archs = arm64-v8a
           android.accept_sdk_license = True
-          android.skip_update = True
+          android.build_tools_version = 34.0.0
           android.debug_art = 0
           p4a.branch = master
 
@@ -67,6 +67,11 @@ jobs:
           log_level = 1
           warn_on_root = 1
           EOF
+
+      - name: Install aidl
+        run: |
+          yes | $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager "build-tools;34.0.0" || true
+          yes | $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" || true
 
       - name: Build APK
         run: |
