@@ -1,0 +1,104 @@
+import os
+import random
+import time
+
+yaderki = []
+
+while True:
+    print("\n=== Личный доходяга: развлечения на корабле ===")
+    print("1. Добавить игру для Доходяги")
+    print("2. Показать все игры в которые Доходяга не поиграл")
+    print("3. Отметить игру в которую Доходяга поиграл")
+    print("4. Удалить развлечение из расписания")
+    print("5. Дать Доходяге воды из кулера")
+    print("6. Устроить Доходяге свиданку с анимешной кошко-девочкой")
+    print("7. Выйти и отпустить Доходягу в свободное плаванье")
+    print("8. JARONA!!!")
+    nochoice = input("Выберите пункт меню: ")
+
+    if nochoice == "1":
+        new_reznya = input("Введите новое развлечение для Доходяги: ").strip()
+        if new_reznya:
+            yaderki.append(new_reznya)
+            print("Развлечение добавлено! Доходяга идет развлекаться.")
+            
+            if random.randint(1, 100) == 1:
+                if os.path.exists("glacier.mp3"):
+                    os.system("start glacier.mp3")
+                    time.sleep(67)
+                else:
+                    print("Файл не найден в папке со скриптом!")
+        else:
+            print("Нельзя заставить Доходягу скучать.")
+
+    elif nochoice == "2":
+        if yaderki:            
+            print("Развлечения Доходяги:")
+            for i, task in enumerate(yaderki):
+                print(f"{i + 1}. {task}")
+        else:
+            print("Доходяга скучает.")
+
+    elif nochoice == "3":
+        if yaderki:
+            for i, task in enumerate(yaderki):
+                print(f"{i + 1}. {task}")
+            try:
+                task_num = int(input("Введите номер игры, в которую Доходяга обязан играть: "))
+                if 1 <= task_num <= len(yaderki):
+                    completed = yaderki.pop(task_num - 1)
+                    print(f"Игра '{completed}' сыграна Доходягой.")
+                else:
+                    print("Неверный номер игры.")
+            except ValueError:
+                print("Введите число!")
+        else:
+            print("Доходяга скучает.")
+
+    elif nochoice == "4":
+        if yaderki:
+            for i, task in enumerate(yaderki):
+                print(f"{i+1}. {task}")
+            try:
+                task_num = int(input("Введите номер игры, в которую Доходяга больше не играет: "))
+                if 1 <= task_num <= len(yaderki):
+                    removed = yaderki.pop(task_num - 1)
+                    print(f"Игра '{removed}' УДАЛЕНА И ДОХОДЯГА БУДЕТ СКУЧАТЬ ДО КОНЦА ЕГО ДНЕЙ!!! .")
+                else:
+                    print("Неверный номер игры.")
+            except ValueError:
+                print("Введите число!")
+        else:
+            print("Доходяга скучает.")
+
+    elif nochoice == "7":
+        print("Вы отправили ДОХОДЯГУ в свободное плаванье!")
+        break
+
+    elif nochoice == "8":
+        print("JARONA!!!")
+        if os.path.exists("jarona.mp3"):
+            os.system("start jarona.mp3")
+        else:
+            print("Файл 'jarona.mp3' не найден в папке со скриптом!")
+
+    elif nochoice == "5":
+        if random.randint(1, 100) == 1:
+            print("Кулер вас избил и не отдал свою воду")
+        else:
+            print("Вы налили воды и отдали ее Доходяге")
+    elif nochoice == "6":
+        if os.path.exists("thousand_cafe_zukan.mp3"):
+            os.system("start thousand_cafe_zukan.mp3")
+            print("Вы начали свиданку Доходяги с анимешной кошко-девочкой")
+            time.sleep(2)
+            print("Гастер: А ты в курсе, что этот Доходяга ходит на свиданку с каждой кошко-девочкой?")
+            time.sleep(2)
+            print("Нормальный NPC: И причем каждая анимешная!")
+            time.sleep(1.5)
+            print("Кошко-девочка от вас ушла...")
+        else:
+            print("Вы не можете начать по какой-то причине...")
+
+    else:
+        print("Такой команды нет, обратитесь к Гастеру за помощью. Пожалуйста, выберите от 1 до 6.")
