@@ -61,7 +61,7 @@ jobs:
           android.accept_sdk_license = True
           android.build_tools_version = 34.0.0
           android.debug_art = 0
-          p4a.branch = master
+          p4a.branch = develop
 
           [buildozer]
           log_level = 1
